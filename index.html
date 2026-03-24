@@ -245,7 +245,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 // ── JSONBin config ────────────────────────────────────────────────────────────
 const MASTER_KEY = '$2a$10$DEXwqkruk1LTezqhLyADj.KqublgqOgD1IJZu/EdZbvP./nWenw.e';
 const BIN_NAME   = 'dreamliner-worksheet';
-let   BIN_ID     = null; // will be found or created on load
+let   BIN_ID     = "69c280b8c3097a1dd555a393";
 
 // ── data config ───────────────────────────────────────────────────────────────
 const TEXT_LISTS = {
@@ -394,8 +394,6 @@ async function findOrCreateBin() {
 
 async function loadFromCloud() {
   setStatus('Loading...', 'saving');
-  const ok = await findOrCreateBin();
-  if (!ok) { setStatus('Cloud unavailable', 'error'); return; }
   try {
     const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
       headers: { 'X-Master-Key': MASTER_KEY }
