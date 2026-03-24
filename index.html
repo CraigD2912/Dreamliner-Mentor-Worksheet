@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mentorship Worksheet</title>
+<title>Dreamliner Mentor Worksheet</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -27,6 +27,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .header{display:flex;align-items:flex-end;gap:16px;margin-bottom:6px;padding-bottom:14px;border-bottom:1px solid var(--border)}
 .title{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,6vw,64px);letter-spacing:5px;line-height:1;color:var(--lime)}
 .subtitle{font-family:'DM Mono',monospace;font-size:10px;color:var(--label);letter-spacing:3px;text-transform:uppercase;padding-bottom:8px}
+
+/* save status */
+.save-status{font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:2px;margin-left:auto;align-self:center}
+.save-status.saving{color:var(--orange)}
+.save-status.saved{color:var(--lime)}
+.save-status.error{color:var(--pink)}
 
 .meta-row{display:flex;align-items:center;gap:10px;margin:14px 0 6px;flex-wrap:wrap}
 .meta-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--label);letter-spacing:2px;text-transform:uppercase;white-space:nowrap}
@@ -54,19 +60,16 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .item-input:focus{border-color:var(--border2)}
 .item-input::placeholder{color:#252525}
 
-/* cost rows */
 .cost-item{display:flex;align-items:center;gap:5px;margin-bottom:6px}
 .cost-input{width:78px;background:var(--surface2);border:1px solid var(--border);border-radius:2px;color:var(--text);font-family:'DM Mono',monospace;font-size:11px;padding:4px 7px;outline:none;text-align:right;transition:border-color .2s;flex-shrink:0}
 .cost-input:focus{border-color:var(--border2)}
 
-/* frequency toggle */
 .freq-toggle{display:flex;border:1px solid var(--border);border-radius:2px;overflow:hidden;flex-shrink:0}
 .freq-btn{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.3px;padding:4px 6px;cursor:pointer;background:transparent;border:none;color:var(--muted);transition:all .15s;line-height:1}
 .freq-btn:hover{color:var(--text)}
 .freq-btn.active-m{background:#1b2b08;color:var(--lime)}
 .freq-btn.active-o{background:#2b1c08;color:var(--orange)}
 
-/* totals */
 .total-row{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:7px 10px 6px;border-top:1px solid var(--border);margin-top:4px}
 .total-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--label)}
 .total-val{font-family:'Bebas Neue',sans-serif;font-size:22px;min-width:90px;text-align:right}
@@ -75,14 +78,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .total-val.pink{color:var(--pink)}
 .once-note{font-family:'DM Mono',monospace;font-size:8px;color:var(--orange);padding:2px 10px 4px;text-align:right;min-height:14px;font-style:italic}
 
-/* legend */
 .legend{display:flex;gap:12px;padding:5px 10px 6px;border-top:1px solid var(--border);margin-top:2px}
 .leg{display:flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:8px;color:var(--muted)}
 .leg-dot{width:8px;height:8px;border-radius:1px;flex-shrink:0}
 .leg-dot.m{background:#1b2b08;border:1px solid var(--lime)}
 .leg-dot.o{background:#2b1c08;border:1px solid var(--orange)}
 
-/* TMI */
 .tmi-panel{background:var(--surface);border:1px solid var(--border);border-radius:3px;padding:14px 16px;grid-column:3;grid-row:1}
 .tmi-title{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:3px;color:var(--label);margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:8px}
 .tmi-formula{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-bottom:14px;line-height:1.9}
@@ -94,7 +95,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .tmi-val.teal{color:var(--teal)}
 .tmi-divider{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin:6px 0 10px 44px}
 
-/* action */
 .action-panel{grid-column:4;grid-row:1/4;display:flex;flex-direction:column;gap:10px}
 .action-card{background:var(--surface);border:1px solid var(--border);border-radius:3px;overflow:hidden}
 .action-head{padding:9px 12px;font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:3px;border-bottom:1px solid var(--border)}
@@ -103,12 +103,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .action-head.pink{color:var(--pink)}
 .action-body{padding:8px 10px}
 
-/* bottom */
-.bottom-bar{display:flex;justify-content:flex-end;gap:10px;margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+.bottom-bar{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
 .btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:9px 18px;border:1px solid var(--border);border-radius:2px;cursor:pointer;background:transparent;color:var(--label);transition:all .2s}
 .btn:hover{border-color:var(--lime);color:var(--lime)}
 .btn-save{background:var(--lime);color:#0e0e0e;border-color:var(--lime);font-weight:600}
 .btn-save:hover{background:#d6ff44;border-color:#d6ff44;color:#0e0e0e}
+.btn-save:disabled{opacity:.5;cursor:not-allowed}
 
 @media(max-width:960px){
   .worksheet{grid-template-columns:1fr 1fr}
@@ -130,31 +130,30 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 <div class="header">
   <div class="title">MENTORSHIP</div>
   <div class="subtitle">Goal Setting Worksheet</div>
+  <span class="save-status" id="syncStatus">Loading...</span>
 </div>
 
 <div class="meta-row">
   <span class="meta-label">In</span>
-  <input class="meta-input months" id="months" type="number" min="1" max="120" placeholder="__" oninput="calc()">
+  <input class="meta-input months" id="months" type="number" min="1" max="120" placeholder="__" oninput="calc();autoSave()">
   <span class="meta-label">months, I dream of:</span>
-  <input class="meta-input dream" id="dreamText" type="text" placeholder="Describe your dream…">
+  <input class="meta-input dream" id="dreamText" type="text" placeholder="Describe your dream…" oninput="autoSave()">
 </div>
 
 <div class="meta-row">
   <span class="meta-label">Monthly Expenses</span>
   <span class="meta-label">$</span>
-  <input class="meta-input expenses" id="expenses" type="number" placeholder="0" min="0" oninput="calc()">
+  <input class="meta-input expenses" id="expenses" type="number" placeholder="0" min="0" oninput="calc();autoSave()">
   <span class="meta-label" style="font-size:9px;color:var(--muted);letter-spacing:1px">— used in TMI formula</span>
 </div>
 
 <div class="worksheet">
 
-  <!-- STEP 1: HAVING -->
   <div class="card">
     <div class="card-head"><span class="badge lime">1</span><span class="card-title">HAVING</span></div>
     <div class="card-body" id="list-having"></div>
   </div>
 
-  <!-- COST A -->
   <div class="card">
     <div class="card-head"><span class="badge grey">5</span><span class="card-title">COST — A</span></div>
     <div class="card-body" id="cost-a"></div>
@@ -166,7 +165,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     <div class="total-row"><span class="total-label">A =</span><span class="total-val lime" id="tot-a">$0.00</span></div>
   </div>
 
-  <!-- TMI -->
   <div class="tmi-panel">
     <div class="tmi-title">Target Monthly Income</div>
     <div class="tmi-formula">
@@ -183,7 +181,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     </div>
   </div>
 
-  <!-- ACTION PANEL -->
   <div class="action-panel">
     <div class="action-card">
       <div class="action-head lime">Steps Now</div>
@@ -199,13 +196,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     </div>
   </div>
 
-  <!-- STEP 2: BEING -->
   <div class="card">
     <div class="card-head"><span class="badge teal">2</span><span class="card-title">BEING</span></div>
     <div class="card-body" id="list-being"></div>
   </div>
 
-  <!-- COST B -->
   <div class="card">
     <div class="card-head"><span class="badge grey">5</span><span class="card-title">COST — B</span></div>
     <div class="card-body" id="cost-b"></div>
@@ -217,19 +212,16 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     <div class="total-row"><span class="total-label">B =</span><span class="total-val teal" id="tot-b">$0.00</span></div>
   </div>
 
-  <!-- STEP 4: DOING -->
   <div class="card">
     <div class="card-head"><span class="badge teal">4</span><span class="card-title">DOING</span></div>
     <div class="card-body" id="list-doing4"></div>
   </div>
 
-  <!-- STEP 3: DOING -->
   <div class="card">
     <div class="card-head"><span class="badge pink">3</span><span class="card-title">DOING</span></div>
     <div class="card-body" id="list-doing3"></div>
   </div>
 
-  <!-- COST C -->
   <div class="card">
     <div class="card-head"><span class="badge grey">5</span><span class="card-title">COST — C</span></div>
     <div class="card-body" id="cost-c"></div>
@@ -246,45 +238,48 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 <div class="bottom-bar">
   <button class="btn" onclick="clearAll()">Clear All</button>
   <button class="btn" onclick="window.print()">Print</button>
-  <button class="btn btn-save" id="saveBtn" onclick="save()">Save Progress</button>
+  <button class="btn btn-save" id="saveBtn" onclick="saveToCloud()">Save to Cloud</button>
 </div>
 
 <script>
-// ── data config ──────────────────────────────────────────────────────────────
-const TEXT_LISTS = {
-  'list-having':5, 'list-being':5, 'list-doing4':5, 'list-doing3':5,
-  'list-now':4, 'list-tomorrow':4, 'list-dayafter':4
-};
-const COST_LISTS = { 'cost-a':5, 'cost-b':5, 'cost-c':5 };
-const COST_MAP = { 'cost-a':'tot-a', 'cost-b':'tot-b', 'cost-c':'tot-c' };
-const NOTE_MAP = { 'cost-a':'note-a', 'cost-b':'note-b', 'cost-c':'note-c' };
-const freqState = {};
+// ── JSONBin config ────────────────────────────────────────────────────────────
+const MASTER_KEY = '$2a$10$DEXwqkruk1LTezqhLyADj.KqublgqOgD1IJZu/EdZbvP./nWenw.e';
+const BIN_NAME   = 'dreamliner-worksheet';
+let   BIN_ID     = null; // will be found or created on load
 
-// ── build UI ─────────────────────────────────────────────────────────────────
+// ── data config ───────────────────────────────────────────────────────────────
+const TEXT_LISTS = {
+  'list-having':5,'list-being':5,'list-doing4':5,'list-doing3':5,
+  'list-now':4,'list-tomorrow':4,'list-dayafter':4
+};
+const COST_LISTS = {'cost-a':5,'cost-b':5,'cost-c':5};
+const COST_MAP   = {'cost-a':'tot-a','cost-b':'tot-b','cost-c':'tot-c'};
+const NOTE_MAP   = {'cost-a':'note-a','cost-b':'note-b','cost-c':'note-c'};
+const freqState  = {};
+let   saveTimer  = null;
+
+// ── build UI ──────────────────────────────────────────────────────────────────
 function buildUI() {
-  // text lists
   Object.entries(TEXT_LISTS).forEach(([id, n]) => {
     const el = document.getElementById(id);
     for (let i = 1; i <= n; i++) {
       const d = document.createElement('div');
       d.className = 'list-item';
       d.innerHTML = `<span class="item-num">${i}.</span>
-        <input class="item-input" type="text" placeholder="—" id="t-${id}-${i}">`;
+        <input class="item-input" type="text" placeholder="—" id="t-${id}-${i}" oninput="autoSave()">`;
       el.appendChild(d);
     }
   });
-
-  // cost lists
   Object.entries(COST_LISTS).forEach(([id, n]) => {
     const el = document.getElementById(id);
     for (let i = 1; i <= n; i++) {
-      freqState[`${id}-${i}`] = 'm'; // default monthly
+      freqState[`${id}-${i}`] = 'm';
       const d = document.createElement('div');
       d.className = 'cost-item';
       d.innerHTML = `
         <span class="item-num">${i}.</span>
         <input class="cost-input" type="number" placeholder="0" min="0"
-               id="c-${id}-${i}" oninput="calc()">
+               id="c-${id}-${i}" oninput="calc();autoSave()">
         <div class="freq-toggle">
           <button class="freq-btn active-m" id="fb-${id}-${i}-m"
                   onclick="setFreq('${id}',${i},'m')">MO</button>
@@ -298,95 +293,168 @@ function buildUI() {
 
 function setFreq(id, i, mode) {
   freqState[`${id}-${i}`] = mode;
-  document.getElementById(`fb-${id}-${i}-m`).className = 'freq-btn' + (mode==='m' ? ' active-m' : '');
-  document.getElementById(`fb-${id}-${i}-o`).className = 'freq-btn' + (mode==='o' ? ' active-o' : '');
-  calc();
+  document.getElementById(`fb-${id}-${i}-m`).className = 'freq-btn'+(mode==='m'?' active-m':'');
+  document.getElementById(`fb-${id}-${i}-o`).className = 'freq-btn'+(mode==='o'?' active-o':'');
+  calc(); autoSave();
 }
 
 // ── calc ──────────────────────────────────────────────────────────────────────
 function fmt(n) {
-  return '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
 }
-
 function calcSection(id) {
-  const months = Math.max(1, parseFloat(document.getElementById('months').value) || 1);
+  const months = Math.max(1, parseFloat(document.getElementById('months').value)||1);
   const n = COST_LISTS[id];
-  let sum = 0, onceSum = 0;
-  for (let i = 1; i <= n; i++) {
-    const raw = parseFloat(document.getElementById(`c-${id}-${i}`)?.value) || 0;
-    if (freqState[`${id}-${i}`] === 'm') {
-      sum += raw;
-    } else {
-      sum += raw / months;
-      if (raw > 0) onceSum += raw;
-    }
+  let sum=0, onceSum=0;
+  for (let i=1;i<=n;i++) {
+    const raw = parseFloat(document.getElementById(`c-${id}-${i}`)?.value)||0;
+    if (freqState[`${id}-${i}`]==='m') { sum+=raw; }
+    else { sum+=raw/months; if(raw>0) onceSum+=raw; }
   }
   document.getElementById(COST_MAP[id]).textContent = fmt(sum);
   const noteEl = document.getElementById(NOTE_MAP[id]);
-  noteEl.textContent = onceSum > 0
-    ? `Once-off: ${fmt(onceSum)} ÷ ${months} mo = ${fmt(onceSum/months)}/mo`
+  const months2 = Math.max(1, parseFloat(document.getElementById('months').value)||1);
+  noteEl.textContent = onceSum>0
+    ? `Once-off: ${fmt(onceSum)} ÷ ${months2} mo = ${fmt(onceSum/months2)}/mo`
     : '';
   return sum;
 }
-
 function calc() {
-  const a = calcSection('cost-a');
-  const b = calcSection('cost-b');
-  const c = calcSection('cost-c');
-  const exp = parseFloat(document.getElementById('expenses').value) || 0;
-  const tmi = a + b + c + (1.3 * exp);
-  const tdi = tmi / 30;
-  document.getElementById('tmi-v').textContent = fmt(tmi);
-  document.getElementById('tdi-v').textContent = fmt(tdi);
+  const a=calcSection('cost-a'), b=calcSection('cost-b'), c=calcSection('cost-c');
+  const exp=parseFloat(document.getElementById('expenses').value)||0;
+  const tmi=a+b+c+(1.3*exp);
+  document.getElementById('tmi-v').textContent=fmt(tmi);
+  document.getElementById('tdi-v').textContent=fmt(tmi/30);
 }
 
-// ── persist ───────────────────────────────────────────────────────────────────
-function save() {
-  const data = { freq: { ...freqState } };
-  document.querySelectorAll('input').forEach(el => { if (el.id) data[el.id] = el.value; });
-  localStorage.setItem('mw3', JSON.stringify(data));
-  const btn = document.getElementById('saveBtn');
-  btn.textContent = 'Saved ✓';
-  setTimeout(() => btn.textContent = 'Save Progress', 1800);
+// ── collect / apply data ──────────────────────────────────────────────────────
+function collectData() {
+  const data = { freq: {...freqState}, inputs: {} };
+  document.querySelectorAll('input').forEach(el => {
+    if (el.id) data.inputs[el.id] = el.value;
+  });
+  return data;
 }
-
-function load() {
-  const raw = localStorage.getItem('mw3');
-  if (!raw) return;
-  try {
-    const data = JSON.parse(raw);
-    // restore freq toggles first
-    if (data.freq) {
-      Object.entries(data.freq).forEach(([k, v]) => {
-        const parts = k.split('-'); // e.g. cost-a-1
-        const i = parseInt(parts[parts.length - 1]);
-        const id = parts.slice(0, parts.length - 1).join('-');
-        setFreq(id, i, v);
-      });
-    }
-    // restore inputs
-    Object.entries(data).forEach(([key, val]) => {
-      if (key === 'freq') return;
-      const el = document.getElementById(key);
+function applyData(data) {
+  if (!data) return;
+  if (data.freq) {
+    Object.entries(data.freq).forEach(([k,v]) => {
+      const parts = k.split('-');
+      const i = parseInt(parts[parts.length-1]);
+      const id = parts.slice(0,parts.length-1).join('-');
+      setFreq(id, i, v);
+    });
+  }
+  if (data.inputs) {
+    Object.entries(data.inputs).forEach(([id,val]) => {
+      const el = document.getElementById(id);
       if (el) el.value = val;
     });
-    calc();
-  } catch(e) { console.warn('Load failed', e); }
+  }
+  calc();
+}
+
+// ── JSONBin API ───────────────────────────────────────────────────────────────
+function setStatus(msg, cls) {
+  const el = document.getElementById('syncStatus');
+  el.textContent = msg;
+  el.className = 'save-status ' + cls;
+}
+
+async function findOrCreateBin() {
+  // list all bins
+  try {
+    const res = await fetch('https://api.jsonbin.io/v3/bins', {
+      headers: { 'X-Master-Key': MASTER_KEY }
+    });
+    const json = await res.json();
+    if (json.result) {
+      const found = json.result.find(b => b.snippetMeta?.name === BIN_NAME);
+      if (found) { BIN_ID = found.id; return true; }
+    }
+  } catch(e) {}
+
+  // create new bin
+  try {
+    const res = await fetch('https://api.jsonbin.io/v3/b', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': MASTER_KEY,
+        'X-Bin-Name': BIN_NAME,
+        'X-Bin-Private': 'false'
+      },
+      body: JSON.stringify({ initialized: true })
+    });
+    const json = await res.json();
+    if (json.metadata?.id) { BIN_ID = json.metadata.id; return true; }
+  } catch(e) {}
+  return false;
+}
+
+async function loadFromCloud() {
+  setStatus('Loading...', 'saving');
+  const ok = await findOrCreateBin();
+  if (!ok) { setStatus('Cloud unavailable', 'error'); return; }
+  try {
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+      headers: { 'X-Master-Key': MASTER_KEY }
+    });
+    const json = await res.json();
+    if (json.record && !json.record.initialized) {
+      applyData(json.record);
+    }
+    setStatus('● Live', 'saved');
+  } catch(e) {
+    setStatus('Load failed', 'error');
+  }
+}
+
+async function saveToCloud() {
+  if (!BIN_ID) { setStatus('Not connected', 'error'); return; }
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+  setStatus('Saving...', 'saving');
+  try {
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': MASTER_KEY
+      },
+      body: JSON.stringify(collectData())
+    });
+    const json = await res.json();
+    if (json.metadata) {
+      setStatus('● Saved', 'saved');
+    } else {
+      setStatus('Save failed', 'error');
+    }
+  } catch(e) {
+    setStatus('Save failed', 'error');
+  }
+  btn.disabled = false;
+}
+
+function autoSave() {
+  setStatus('Unsaved changes...', 'saving');
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveToCloud, 2000); // auto-save after 2s of inactivity
 }
 
 function clearAll() {
   if (!confirm('Clear everything and start fresh?')) return;
-  document.querySelectorAll('input').forEach(el => el.value = '');
-  Object.entries(COST_LISTS).forEach(([id, n]) => {
-    for (let i = 1; i <= n; i++) setFreq(id, i, 'm');
+  document.querySelectorAll('input').forEach(el => el.value='');
+  Object.entries(COST_LISTS).forEach(([id,n]) => {
+    for (let i=1;i<=n;i++) setFreq(id,i,'m');
   });
   calc();
-  localStorage.removeItem('mw3');
+  saveToCloud();
 }
 
 // ── init ──────────────────────────────────────────────────────────────────────
 buildUI();
-load();
+loadFromCloud();
 </script>
 </body>
 </html>
